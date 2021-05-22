@@ -84,7 +84,7 @@ public class GradeRepository extends BaseRepository {
 
 			grade.setMaxPost(maxPost);
 			grade.setBasic(basicSalary);
-			grade.setName("Grade/Rank - " + i);
+			grade.setName("Grade - " + i);
 
 			Double houseRent = (basicSalary / 100) * HOUSE_RENT;
 			Double medical = (basicSalary / 100) * MEDICAL_ALLOWANCE;

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -143,36 +142,8 @@ public interface CommonFunctions {
 			if (String.valueOf(numb).length() == length)
 				return numb;
 		}
-	}
+	}	
 
-	default Map<String, Date> baseOnCriteriaFromAndToDate(Map<String, Object> dateRange) {
-		Map<String, Date> formDateAndToDate = new HashMap<String, Date>();
-		Date fromDate = null;
-		Date toDate = null;
-		if (DateRangCriteria.DATE_BETWEEN.name().equals(dateRange.get("dateRange"))) {
-			fromDate = (Date) dateRange.get("fromDate");
-			toDate = (Date) dateRange.get("toDate");
-		} else if (DateRangCriteria.TODAY.name().equals(dateRange.get("dateRange"))) {
-			fromDate = clearTime(new Date());
-			toDate = oneDayPlusClearTime(new Date());
-		} else if (DateRangCriteria.THIS_WEEK.name().equals(dateRange.get("dateRange"))) {
-			fromDate = thisWeekFirstDate(null);
-			toDate = thisWeekLastDate(null);
-		} else if (DateRangCriteria.THIS_MONTH.name().equals(dateRange.get("dateRange"))) {
-			fromDate = thisMonthFirstDate(null);
-			toDate = thisMonthLastDate(null);
-		} else if (DateRangCriteria.THIS_YEAR.name().equals(dateRange.get("dateRange"))) {
-			fromDate = thisYearFirstDate();
-			toDate = thisYearLastDate();
-		} else {
-			fromDate = clearTime(new Date());
-			toDate = oneDayPlusClearTime(new Date());
-		}
-
-		formDateAndToDate.put("fromDate", fromDate);
-		formDateAndToDate.put("toDate", toDate);
-		return formDateAndToDate;
-	}
 
 	default Date thisWeekFirstDate(Date date) {
 		Calendar cal = Calendar.getInstance();
@@ -510,38 +481,6 @@ public interface CommonFunctions {
 		// return null;
 	}
 
-	// lookup detail related
-	long prefixLookupNo = 5033l;
-	long unitsLookupNo = 5032l;
-	long eligibilityLookupNo = 5036l;
-	long serviceCategoryLookupNo = 5031l;
-	long personCategoryLookupNo = 5037l;
-	long rankLookupNo = 5038l;
-	long corpsLookupNo = 5039l;
-	long nationalityLookupNo = 5041l;
-	long priorityLookupNo = 5047l;
-	long bloodGroupLookupNo = 1004l;
-	long maritalStatusLookupNo = 1084l;
-	long religionLookupNo = 1006l;
-	long medicalCategoryLookupNo = 5040l;
-	long districtLookupNo = 1001l;
-	long relationListNo = 1021l;
-	long familyLookupNo = 5044l;
-	long cneLookupNo = 5045l;
-	long reLookupNo = 5046l;
-	long jobTypeNo = 1015l;
-	long employeeTypeNo = 1007l;
-	long hrTypeNo = 1014l;
-	long upazilaLookupNo = 5043l;
-	long countryLookupNo = 1002l;
-	long genderList = 5007l;
-	long patientCondition = 1074L;
-	long arrivalCondition = 1072L;
-	long accompainedBy = 1076L;
-
-	long physicalTherapy = 1204L;
-	long theraputicExcercise = 1205L;
-
 	default <T> T objectMapperReadValueWithDate(String content, Class<T> valueType) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S"));
@@ -591,7 +530,6 @@ public interface CommonFunctions {
 	}
 
 	default Date getYear(Date dateParam) {
-		// return deateParse(dateFormat(dateParam, "yyyy"),"yyyy");
 		LocalDate Ldate = LocalDate.of(Integer.parseInt(dateFormat(dateParam, "yyyy")), 0, 0);
 
 		Date date = Date.from(Ldate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -667,11 +605,8 @@ public interface CommonFunctions {
 	}
 
 	default String getRandomNumber() {
-		// It will generate 6 digit random Number.
-		// from 0 to 999999
 		Random rnd = new Random();
 		int number = rnd.nextInt(999999);
-		// this will convert any number sequence into 6 character.
 		return String.format("%06d", number);
 	}
 
@@ -692,19 +627,10 @@ public interface CommonFunctions {
 		return false;
 	}
 
-	/**
-	 * @param sourceObj
-	 * @param targetClazz
-	 */
 	default void copyPropertiesEntityToDto(Object sourceObj, Object targetClazz) {
 		BeanUtils.copyProperties(sourceObj, targetClazz);
 	}
 
-	/**
-	 * @param sourceObj
-	 * @param targetClazz
-	 * @return
-	 */
 	@SuppressWarnings("unchecked")
 	default <T> T copyPropertiesEntityToDto(Object sourceObj, Class<T> targetClazz) {
 		Object clazzInstance = null;
@@ -723,11 +649,6 @@ public interface CommonFunctions {
 
 	}
 
-	/**
-	 * @param sourceObj
-	 * @param targetClazz
-	 * @return
-	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	default <T> List copyPropertiesEntityListToDtoList(List sourceList, Class<T> targetClazz) {
 

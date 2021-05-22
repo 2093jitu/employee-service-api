@@ -1,6 +1,7 @@
 package com.dynamicform.app.transaction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -67,11 +68,22 @@ public class TransactionRepository extends BaseRepository {
 	}
 
 	public Response getByComId(String reqObj) {
+
 		TransactionEntity transactionEntity = null;
 		if (null != reqObj) {
 			transactionEntity = objectMapperReadValue(reqObj, TransactionEntity.class);
 		}
-		return baseList(criteriaQuery(transactionEntity));
+		Response res = baseList(criteriaQuery(transactionEntity));
+
+		if (res.isSuccess() && !CollectionUtils.isEmpty(res.getItems())) {
+			List<TransactionEntity> transactions = (List<TransactionEntity>) getValueFromObject(res.getItems(),TransactionEntity.class);
+			Collections.sort(transactions, (o1, o2) -> o2.getId().compareTo(o1.getId()));
+			Response finalRes = new Response();
+			finalRes.setItems(transactions);
+			return getSuccessResponse("Data Found !.", finalRes);
+		}
+
+		return getErrorResponse("Data Not Found!");
 	}
 
 	public TransactionEntity findById(Long id) {

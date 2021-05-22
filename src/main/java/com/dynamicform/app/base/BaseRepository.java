@@ -3,28 +3,22 @@ package com.dynamicform.app.base;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.ParameterMode;
 import javax.persistence.Query;
-import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -50,13 +44,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.dynamicform.app.util.CommonFunctions;
-import com.dynamicform.app.util.CommonUtils;
 import com.dynamicform.app.util.Response;
 
-/**
- * @author Mohammad Lockman
- *
- */
 
 public class BaseRepository implements CommonFunctions {
 
@@ -507,10 +496,7 @@ public class BaseRepository implements CommonFunctions {
 		return photoResponse;
 
 	}
-
-	public Response findByPatientReportFile(String fileName, String subDir) {
-		return findByInSubdir(fileName, subDir);
-	}
+	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> TypedQuery baseTypedQuery(CriteriaQuery criteria) {
@@ -619,10 +605,7 @@ public class BaseRepository implements CommonFunctions {
 		return criteriaQuery.select(root).toString();
 	}
 
-	public <T> void limitedCriteriaQuer(Class clazz) {
-		Query limitedCriteriaQuery = entityManager.createQuery(criteriaQuery(clazz)).setFirstResult(0)
-				.setMaxResults(10);
-	}
+	
 
 	public <T> Long totalCount(Class<T> clazz, List<Predicate> p) {
 
@@ -832,55 +815,9 @@ public class BaseRepository implements CommonFunctions {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> List<Predicate> basePredicate(Map<String, Object> fields) {
+	
 
-		List<Predicate> p = new ArrayList<Predicate>();
-
-		Iterator<Entry<String, Object>> fv = fields.entrySet().iterator();
-
-		while (fv.hasNext()) {
-			Map.Entry<String, Object> pair = fv.next();
-
-			if (pair.getValue() instanceof String) {
-				p.add(builder.like(builder.lower(root.get(pair.getKey().trim())), CommonUtils.PERCENTAGE_SIGN
-						+ ((String) pair.getValue()).trim().toLowerCase() + CommonUtils.PERCENTAGE_SIGN));
-			}
-
-			if (pair.getValue() instanceof Long) {
-				p.add(builder.equal(root.get(pair.getKey()), pair.getValue()));
-			}
-
-		}
-
-		return p;
-
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> List<Predicate> basePredicate(Map<String, Object> fields, CriteriaBuilder builder, Root root) {
-
-		List<Predicate> p = new ArrayList<Predicate>();
-
-		Iterator<Entry<String, Object>> fv = fields.entrySet().iterator();
-
-		while (fv.hasNext()) {
-			Map.Entry<String, Object> pair = fv.next();
-
-			if (pair.getValue() instanceof String) {
-				p.add(builder.like(builder.lower(root.get(pair.getKey())), CommonUtils.PERCENTAGE_SIGN
-						+ ((String) pair.getValue()).toLowerCase() + CommonUtils.PERCENTAGE_SIGN));
-			}
-
-			if (pair.getValue() instanceof Long) {
-				p.add(builder.equal(root.get(pair.getKey()), pair.getValue()));
-			}
-
-		}
-
-		return p;
-
-	}
+	
 
 	@SuppressWarnings({ "rawtypes" })
 	public <T> TypedQuery typedQuery(List<Predicate> pConjunctionParam, List<Predicate> pDisJunctionParam) {

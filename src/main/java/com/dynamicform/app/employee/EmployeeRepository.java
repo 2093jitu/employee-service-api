@@ -19,14 +19,7 @@ import com.dynamicform.app.util.Response;
 
 @Repository
 @Transactional
-public class EmployeeRepository extends BaseRepository {
-
-//	private final Long ADD_AMOUNT = 50000l;
-//	private final Long HOUSE_RENT = 20l;
-//	private final Long MEDICAL_ALLOWANCE = 15l;
-
-	@Autowired
-	GradeService gradeService;
+public class EmployeeRepository extends BaseRepository {	
 
 	public Response save(String reqObj) {
 
@@ -91,38 +84,6 @@ public class EmployeeRepository extends BaseRepository {
 		return baseDelete(employeeEntity);
 	}
 
-//	public Response update(String reqObj) {
-//		GradeEntity gradeEntity = objectMapperReadValue(reqObj, GradeEntity.class);
-//		GradeEntity lastSavedGrade = new GradeEntity();
-//
-//		List<GradeEntity> grades = (List<GradeEntity>) getValueFromObject(gradeService.getAll().getItems(),
-//				GradeEntity.class);
-//
-//		if (grades.get(0).getId() == gradeEntity.getId()) { // for lowest grade
-//			for (int i = 0; i < grades.size(); i++) {
-//				GradeEntity dbGrade = grades.get(i);
-//				Double basicSalary = i == 0 ? gradeEntity.getBasic() : lastSavedGrade.getBasic() + ADD_AMOUNT;
-//
-//				dbGrade.setBasic(basicSalary);
-//
-//				Double houseRent = (basicSalary / 100) * HOUSE_RENT;
-//				Double medical = (basicSalary / 100) * MEDICAL_ALLOWANCE;
-//				Double salary = basicSalary + houseRent + medical;
-//
-//				dbGrade.setHouseRent(houseRent);
-//				dbGrade.setMedical(medical);
-//				dbGrade.setSalary(salary);
-//
-//				lastSavedGrade = gradeService.updateGrade(dbGrade);
-//
-//			}
-//		} else {
-//			GradeEntity bdObj = gradeService.findById(gradeEntity.getId());
-//			gradeService.updateGrade(bdObj);
-//
-//		}
-//		return getSuccessResponse("Update Successfull");
-//	}
 
 	public Response list() {
 		EmployeeEntity billsBToBLabPolicyObj = new EmployeeEntity();

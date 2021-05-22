@@ -4,15 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class AppUtil {
 
-	/**
-	 * Checks if is collection empty.
-	 *
-	 * @param collection the collection
-	 * @return true, if is collection empty
-	 */
 	private static boolean isCollectionEmpty(Collection<?> collection) {
 		if (collection == null || collection.isEmpty()) {
 			return true;
@@ -21,12 +14,6 @@ public class AppUtil {
 
 	}
 
-	/**
-	 * Checks if is object empty.
-	 *
-	 * @param object the object
-	 * @return true, if is object empty
-	 */
 	public static boolean isObjectEmpty(Object object) {
 		if (object == null)
 			return true;
@@ -40,23 +27,6 @@ public class AppUtil {
 		return false;
 	}
 
-	/**
-	 * Gets the bean to json string.
-	 *
-	 * @param beanClass the bean class
-	 * @return the bean to json string
-	 */
-	/*
-	 * public static String getBeanToJsonString(Object beanClass) { return new
-	 * Gson().toJson(beanClass); }
-	 */
-
-	/**
-	 * Gets the bean to json string.
-	 *
-	 * @param beanClasses the bean classes
-	 * @return the bean to json string
-	 */
 	public static String getBeanToJsonString(Object... beanClasses) {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Object beanClass : beanClasses) {
@@ -66,13 +36,6 @@ public class AppUtil {
 		return stringBuilder.toString();
 	}
 
-	/**
-	 * Concatenate.
-	 *
-	 * @param listOfItems the list of items
-	 * @param separator   the separator
-	 * @return the string
-	 */
 	public String concatenate(List<String> listOfItems, String separator) {
 		StringBuilder sb = new StringBuilder();
 		Iterator<String> stit = listOfItems.iterator();
@@ -86,13 +49,5 @@ public class AppUtil {
 
 		return sb.toString();
 	}
-
-	/**
-	 * Builds the paginated query.
-	 * 
-	 * @param baseQuery          the base query
-	 * @param paginationCriteria the pagination criteria
-	 * @return the string
-	 */
 
 }

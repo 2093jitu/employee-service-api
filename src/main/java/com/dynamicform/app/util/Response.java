@@ -4,11 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 
-/**
- * @author Mohammad Lockman
- *
- */
-
 public class Response {
 	
 	private boolean success = true;
