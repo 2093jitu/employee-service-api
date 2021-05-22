@@ -18,4 +18,22 @@
 
 - Print / display company account
 
-- note : Employee ID should be 4 digit and unique
+- note : Employee ID must be 4 digit and unique
+
+# Technology
+-------------------------------------------------------------------
+- Spring boot, Spring JPA , Hibernate
+- Rest Controller
+- MySQL
+- Maven
+
+# Installation 
+
+- git clone https://github.com/2093jitu/employee-service-api.git
+- create database schema ------ 'employee'
+- change spring.datasource.url from application-dev.properties
+- spring.datasource.username from application-dev.properties
+- spring.datasource.password from application-dev.properties
+- mvn spring-boot:run
+- run port http://localhost:8080
+
