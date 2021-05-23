@@ -19,7 +19,7 @@ import com.dynamicform.app.util.Response;
 
 @Repository
 @Transactional
-public class EmployeeRepository extends BaseRepository {	
+public class EmployeeRepository extends BaseRepository {
 
 	public Response save(String reqObj) {
 
@@ -84,9 +84,9 @@ public class EmployeeRepository extends BaseRepository {
 		return baseDelete(employeeEntity);
 	}
 
-
 	public Response list() {
 		EmployeeEntity billsBToBLabPolicyObj = new EmployeeEntity();
+		String data = objectToJson(baseList(criteriaQuery(billsBToBLabPolicyObj)));
 		return baseList(criteriaQuery(billsBToBLabPolicyObj));
 	}
 
@@ -95,6 +95,7 @@ public class EmployeeRepository extends BaseRepository {
 		employeeEntity.setId(id);
 		Response response = baseFindById(criteriaQuery(employeeEntity));
 		if (response.isSuccess()) {
+			System.out.println(objectToJson(response.getObj()));
 			return getValueFromObject(response.getObj(), EmployeeEntity.class);
 		}
 		return null;

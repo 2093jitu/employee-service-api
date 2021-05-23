@@ -317,6 +317,7 @@ public class BaseRepository implements CommonFunctions {
 
 			if (list.size() > 0) {
 				response.setItems(list);
+				System.out.println(objectToJson(response.getObj()));
 				return getSuccessResponse("Data found ", response);
 			}
 
