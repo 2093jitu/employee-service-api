@@ -19,57 +19,55 @@ import com.dynamicform.app.employee.EmployeeRepository;
 import com.dynamicform.app.util.Response;
 
 @Repository
-public class ReportRepository extends BaseRepository{
-	
+public class ReportRepository extends BaseRepository {
+
 	@Autowired
 	private CoreJasperService coreJasperService;
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@SuppressWarnings("unchecked")
 	public CusJasperReportDef salarySheet(String reqObj) throws IOException {
 
 //		Object obj = new JSONParser().parse(new FileReader("billDtl.json"));
 
-			JSONObject json = new JSONObject(reqObj);
-			List<EmployeeEntity> employeeList = new ArrayList<EmployeeEntity>();
+		JSONObject json = new JSONObject(reqObj);
+		EmployeeEntity rpt = new EmployeeEntity();
+		List<EmployeeEntity> employeeList = new ArrayList<EmployeeEntity>();
 
-			Response res=employeeRepository.list();
-			if (res.getItems() !=null && res.getItems().size()>0) {
-				employeeList=res.getItems() ;
-			}
-			
+		Response res = employeeRepository.list();
 
-
-
-			Map<String, Object> parameterMap = new HashMap<String, Object>();
-			
-//			splOtSummaryReportPrintDtoList.add(splOtSummaryReportPrintDto);
-
-			CusJasperReportDef report = new CusJasperReportDef();
-
-			report.setReportName("salarySheet");
-			report.setReportDir(getResoucePath("/report/salarySheet") + "/");
-			report.setReportFormat(JasperExportFormat.PDF_FORMAT);
-			report.setParameters(parameterMap);
-			report.setReportData(employeeList);
-
-			ByteArrayOutputStream baos = null;
-			try {
-				baos = coreJasperService.generateReport(report);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			finally {
-				baos.close();
-			}
-
-			report.setContent(baos.toByteArray());
-			return report;
+		if (res.getItems() != null && res.getItems().size() > 0) {
+			rpt.setEmployeeList(res.getItems());
+			employeeList.add(rpt);
 		}
-	
-	
+
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+		CusJasperReportDef report = new CusJasperReportDef();
+
+		report.setReportName("salarySheet");
+		report.setOutputFilename("salarySheet");
+		report.setReportDir(getResoucePath("/report/salarySheet") + "/");
+		report.setReportFormat(JasperExportFormat.PDF_FORMAT);
+		report.setParameters(parameterMap);
+		report.setReportData(employeeList);
+
+		ByteArrayOutputStream baos = null;
+		try {
+			baos = coreJasperService.generateReport(report);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			baos.close();
+		}
+
+		report.setContent(baos.toByteArray());
+		return report;
+	}
+
 	public static String getResoucePath(String filePath) {
 		Resource resource = new ClassPathResource(filePath);
 		try {

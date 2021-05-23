@@ -8,7 +8,7 @@
 
 - Employee Setup (Employee add,edit,delete)
 
-- Employee Account Setup (Account add,edit,delete)n
+- Employee Account Setup (Account add,edit,delete)
 
 - Company Account Setup (Add company account if not exist and add initial balance. add new Cr.ammount and show transaction history)
 
@@ -25,6 +25,7 @@
 - Spring boot, Spring JPA , Hibernate
 - Rest Controller
 - MySQL
+- jasper Reports
 - Maven
 
 # Installation 

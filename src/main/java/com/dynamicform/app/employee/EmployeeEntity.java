@@ -1,5 +1,8 @@
 package com.dynamicform.app.employee;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,6 +49,17 @@ public class EmployeeEntity {
 
 	@Transient
 	private Long idNotEqual;
+	
+	@Transient
+	private List<EmployeeEntity> employeeList = new ArrayList<EmployeeEntity>();
+	
+	public List<EmployeeEntity> getEmployeeList() {
+		return employeeList;
+	}
+
+	public void setEmployeeList(List<EmployeeEntity> employeeList) {
+		this.employeeList = employeeList;
+	}
 
 	public Long getId() {
 		return id;
