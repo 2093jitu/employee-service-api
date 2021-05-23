@@ -9,10 +9,8 @@ import java.util.Map;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import net.sf.jasperreports.engine.JRDataSource;
-/**
- * @author Mohammad Lockman
- *
-// */
+
+
 public class CusJasperReportDef implements Serializable {
 
 	/**

@@ -1,9 +1,6 @@
 package com.dynamicform.app.report;
 
-/**
- * @author Mohammad Lockman
- *
- */
+
 public class ReportPathAndName {
 	
  private String pClient;

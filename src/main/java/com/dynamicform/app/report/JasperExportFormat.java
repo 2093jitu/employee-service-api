@@ -1,8 +1,5 @@
 package com.dynamicform.app.report;
-/**
- * @author Mohammad Lockman
- *
- */
+
 public enum JasperExportFormat  {
 
 	    PDF_FORMAT("application/pdf", "pdf", false),

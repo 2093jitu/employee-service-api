@@ -43,10 +43,7 @@ import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleWriterExporterOutput;
 
-/**
- * @author Md. Jahurul Islam
- *
- */
+
 @Service
 public class CoreJasperService {
 
